@@ -7,7 +7,7 @@ export default class DetailPage extends Component<Props> {
   render() {
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text>HomePage</Text>
+          <Text>DetailPage</Text>
         </View>
     );
   }

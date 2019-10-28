@@ -10,6 +10,7 @@ import TrendingPage from '../page/TrendingPage';
 import FavoritePage from '../page/FavoritePage';
 import MyPage from '../page/MyPage';
 import NavigationUtil from './NavigationUtil';
+import {connect} from 'react-redux';
 
 const TABS = {
     PopularPage: {
@@ -67,16 +68,19 @@ const TABS = {
 };
 
 type Props = {};
-export default class DynamicTabNavigatior extends Component<Props> {
+class DynamicTabNavigatior extends Component<Props> {
     constructor(props) {
         super(props);
         console.disableYellowBox = true;
     }
 
   _tabNavigator () {
+    if (this.Tabs) {
+      return this.Tabs;
+    }
     const {PopularPage, TrendingPage, FavoritePage, MyPage} = TABS;
     const tabs = {PopularPage, TrendingPage, FavoritePage, MyPage}; // 根据需要定制显示的tab
-    return createAppContainer(createBottomTabNavigator(tabs,{
+    return this.Tabs = createAppContainer(createBottomTabNavigator(tabs,{
       tabBarComponent: props => {
         return <TabBarComponent theme={this.props.theme} {...props}/>
       }
@@ -101,16 +105,9 @@ class TabBarComponent extends React.Component {
   }
 
   render () {
-    const {routes, index} = this.props.navigation.state;
-    if (routes[index].params) {
-      const {theme} = routes[index].params;
-      if (theme && theme.updateTime > this.theme.updateTime) {
-        this.theme = theme;
-      }
-    }
     return <BottomTabBar 
       {...this.props}
-      activeTintColor = {this.theme.tintColor || this.props.activeTintColor}
+      activeTintColor = {this.props.theme}
     />
   }
 }
@@ -118,3 +115,9 @@ class TabBarComponent extends React.Component {
 const styles = StyleSheet.create({
 
 });
+
+const mapStateToProps = state => ({
+  theme: state.theme.theme,
+});
+
+export default connect(mapStateToProps)(DynamicTabNavigatior);

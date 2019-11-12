@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Button, StyleSheet } from 'react-native';
 
 type Props = {};
-export default class FavoritePage extends Component<Props> {
+export default class SocialPage extends Component<Props> {
 
   render() {
     const {navigation} = this.props

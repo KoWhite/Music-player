@@ -2,50 +2,39 @@ import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import {createAppContainer} from 'react-navigation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import PopularPage from '../page/PopularPage';
-import TrendingPage from '../page/TrendingPage';
-import FavoritePage from '../page/FavoritePage';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Foundation from 'react-native-vector-icons/Foundation';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FindPage from '../page/FindPage';
+import VideoPage from '../page/VideoPage';
+import SocialPage from '../page/SocialPage';
 import MyPage from '../page/MyPage';
+import AccountPage from '../page/AccountPage';
 import NavigationUtil from './NavigationUtil';
 import {connect} from 'react-redux';
 
 const TABS = {
-    PopularPage: {
-        screen: PopularPage,
+  FindPage: {
+        screen: FindPage,
         navigationOptions: {
-          tabBarLabel: '最热',
+          tabBarLabel: '发现',
           tabBarIcon: ({tintColor, focused}) => {
-            return <MaterialIcons
-              name={'whatshot'}
+            return <MaterialCommunityIcons
+              name={'cloud-search'}
               size = {26}
               style ={{color: tintColor}}
             />
           }
         }
       },
-      TrendingPage: {
-        screen: TrendingPage,
+      VideoPage: {
+        screen: VideoPage,
         navigationOptions: {
-          tabBarLabel: '趋势',
+          tabBarLabel: '视频',
           tabBarIcon: ({tintColor, focused}) => (
-            <Ionicons
-              name={'md-trending-up'}
-              size = {26}
-              style ={{color: tintColor}}
-            />
-          )
-        }
-      },
-      FavoritePage: {
-        screen: FavoritePage,
-        navigationOptions: {
-          tabBarLabel: '收藏',
-          tabBarIcon: ({tintColor, focused}) => (
-            <AntDesign
-              name={'heart'}
+            <Entypo
+              name={'video'}
               size = {26}
               style ={{color: tintColor}}
             />
@@ -57,8 +46,34 @@ const TABS = {
         navigationOptions: {
           tabBarLabel: '我的',
           tabBarIcon: ({tintColor, focused}) => (
-            <AntDesign
-              name={'smileo'}
+            <FontAwesome
+              name={'music'}
+              size = {26}
+              style ={{color: tintColor}}
+            />
+          )
+        }
+      },
+      SocialPage: {
+        screen: SocialPage,
+        navigationOptions: {
+          tabBarLabel: '云村',
+          tabBarIcon: ({tintColor, focused}) => (
+            <Foundation
+              name={'social-myspace'}
+              size = {26}
+              style ={{color: tintColor}}
+            />
+          )
+        }
+      },
+      AccountPage: {
+        screen: AccountPage,
+        navigationOptions: {
+          tabBarLabel: '账号',
+          tabBarIcon: ({tintColor, focused}) => (
+            <MaterialCommunityIcons
+              name={'account'}
               size = {26}
               style ={{color: tintColor}}
             />
@@ -78,8 +93,8 @@ class DynamicTabNavigatior extends Component<Props> {
     if (this.Tabs) {
       return this.Tabs;
     }
-    const {PopularPage, TrendingPage, FavoritePage, MyPage} = TABS;
-    const tabs = {PopularPage, TrendingPage, FavoritePage, MyPage}; // 根据需要定制显示的tab
+    const {FindPage, VideoPage, MyPage, SocialPage,  AccountPage} = TABS;
+    const tabs = {FindPage, VideoPage, MyPage, SocialPage,  AccountPage}; // 根据需要定制显示的tab
     return this.Tabs = createAppContainer(createBottomTabNavigator(tabs,{
       tabBarComponent: props => {
         return <TabBarComponent theme={this.props.theme} {...props}/>

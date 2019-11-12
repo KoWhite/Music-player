@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 
 type Props = {};
 export default class WelcomePage extends Component<Props> {
+  
   componentDidMount() {
     this.timer = setTimeout(() => {
       const {navigation} = this.props;
@@ -17,7 +18,7 @@ export default class WelcomePage extends Component<Props> {
   render() {
     return (
         <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text>Hello, world!</Text>
+          <Image source={require('/MP/resource/advertisement.jpg')} />
         </View>
     );
   }

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import {connect} from 'react-redux';
+import actions from '../action/index'
 import {createAppContainer} from 'react-navigation';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
-import NavigationUtil from '../navigator/NavigationUtil'
+import NavigationUtil from '../navigator/NavigationUtil';
 
 type Props = {};
-export default class PopularPage extends Component<Props> {
+
+class VideoPage extends Component<Props> {
   constructor(props) {
     super(props);
     this.tabNames = ['Java', 'PHP', 'JavaScript', 'IOS', 'React Native'];
@@ -65,16 +68,13 @@ class PopularTab extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  tabStyle: {
-    minWidth: 50
-  },
-  indicatorStyle: {
-    height: 2,
-    backgroundColor: '#fff'
-  },
-  labelStyle: {
-    fontSize: 13,
-    marginTop: 6,
-    marginBottom: 6
-  }
+  
 });
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+  onThemeChange: theme => dispatch(actions.onThemeChange(theme))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(VideoPage);

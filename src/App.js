@@ -9,7 +9,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import AppNavigator from './navigator/AppNavigators';
-import store from './store'
+import store from './store';
 
 const App: () => React$Node = () => {
   return (
